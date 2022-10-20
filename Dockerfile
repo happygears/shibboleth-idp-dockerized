@@ -3,9 +3,9 @@ FROM centos:centos7 as temp
 ENV java_version=8.0.212 \
     zulu_version=8.38.0.13 \
     java_hash=14136019014c020fee0fc13073d00388 \
-    jetty_version=9.3.27.v20190418 \
+    jetty_version=9.4.49.v20220914 \
     jetty_hash=7c7c80dd1c9f921771e2b1a05deeeec652d5fcaa \
-    idp_version=3.4.3 \
+    idp_version=4.2.1 \
     idp_hash=eb86bc7b6366ce2a44f97cae1b014d307b84257e3149469b22b2d091007309db \
     dta_hash=2f547074b06952b94c35631398f36746820a7697 \
     slf4j_version=1.7.25 \
@@ -30,7 +30,7 @@ RUN wget -q http://cdn.azul.com/zulu/bin/zulu$zulu_version-ca-jdk$java_version-l
     && ln -s /opt/zulu$zulu_version-ca-jdk$java_version-linux_x64/jre/ /opt/jre-home
 
 # Download Jetty, verify the hash, and install, initialize a new base
-RUN wget -q http://central.maven.org/maven2/org/eclipse/jetty/jetty-distribution/$jetty_version/jetty-distribution-$jetty_version.tar.gz \
+RUN wget -q http://repo1.maven.org/maven2/org/eclipse/jetty/jetty-distribution/$jetty_version/jetty-distribution-$jetty_version.tar.gz \
     && echo "$jetty_hash  jetty-distribution-$jetty_version.tar.gz" | sha1sum -c - \
     && tar -zxvf jetty-distribution-$jetty_version.tar.gz -C /opt \
     && ln -s /opt/jetty-distribution-$jetty_version/ /opt/jetty-home
